@@ -1,20 +1,18 @@
 import Phaser from "phaser";
-import background from "../assets/Title_Background.png";
+import titleBackground from "../assets/Title_Background.png";
+import Utils from "../gameobjects/Utils";
 
-class TitleScene extends Phaser.Scene {
+export default class TitleScene extends Phaser.Scene {
   constructor() {
     super({ key: "TitleScene" });
   }
 
   preload() {
-    this.load.image("background", background);
-    // this.load.image("startButton", "assets/startButton.png"); // Optional start button image
+    this.load.image("titleBackground", titleBackground);
   }
 
   create() {
-    // Add a background
-    const bg = this.add.image(700, 350, "background"); // Position at the center of the screen
-    bg.setScale(0.7);
+    Utils.setBackground(this, "titleBackground")
 
     // Replace the button image with a text button
     const newGameButtonBox = this.add.graphics();
@@ -39,7 +37,7 @@ class TitleScene extends Phaser.Scene {
 
 
     newGameButton.on("pointerdown", () => {
-      this.scene.switch("DoctorOfficeScene"); // Starts the game in the 'Doctor Office' scene
+      this.scene.switch("WaitingRoomScene");
     });
 
     this.tweens.add({
@@ -51,5 +49,3 @@ class TitleScene extends Phaser.Scene {
     });
   }
 }
-
-export default TitleScene;

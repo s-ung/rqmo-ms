@@ -1,10 +1,8 @@
-import { ChatBox, ChatDropdownInput } from '../gameobjects/Chat';
 import background from '../assets/background.png';
 import dude from '../assets/dude.png';
 import Phaser from 'phaser';
 import doctor from '../assets/doctor.png';
-import { GameTree } from '../gameobjects/Game';
-import ScoreDisplay from '../gameobjects/ScoreDisplay';
+import Utils from '../gameobjects/Utils';
 
 export default class SpecialistScene extends Phaser.Scene {
     constructor() {
@@ -18,34 +16,11 @@ export default class SpecialistScene extends Phaser.Scene {
     }
 
     create() {
-        // Access the scene data directly from the JavaScript object
-        this.gameTree = GameTree.getInstance()
-        // Set up the scene visuals
-        this.canvas = this.sys.game.canvas;
-        this.width = this.canvas.width;
-        this.height = this.canvas.height;
-
-        this.add.image(this.width / 2, this.height / 2, 'SpecialistBackground').setDisplaySize(this.width, this.height);
-
-        // Create the chatbox
-        this.createChatBox();
-
-        // Initialize ScoreDisplay
-        this.scoreDisplay = new ScoreDisplay(this, 250, 40);
+        Utils.setUpScene(this);
+        Utils.setBackground(this, 'SpecialistBackgorund');
 
         // Show the first specialist message right when the scene is created
         this.showSpecialistMessage();
-    }
-
-    createChatBox() {
-        let rectHeight = this.height / 4;
-        let rectMargin = 0.1 * this.width;
-
-        // Create the chat box at the bottom of the screen
-        this.chatBox = new ChatBox(this, rectMargin, this.height - rectHeight, this.width - 2 * rectMargin, rectHeight, ChatDropdownInput);
-
-        // Listen for player input using an arrow function to maintain the `this` context
-        this.chatBox.chatController.addListener(this);
     }
 
     showSpecialistMessage() {
