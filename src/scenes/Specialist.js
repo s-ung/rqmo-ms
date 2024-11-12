@@ -16,9 +16,12 @@ export default class SpecialistScene extends BaseScene {
         this.load.spritesheet('doctor', doctor, { frameWidth: 32, frameHeight: 48 });
     }
 
-    create() {
+    create(data) {
         // Make sure to all super create to set up required objects
-        super.create()
+        super.create(data)
+
+        // Set the scene
+        this.scoreDisplay.setScene(this);
 
         this.add.image(this.width / 2, this.height / 2, 'SpecialistBackground').setDisplaySize(this.width, this.height);
 

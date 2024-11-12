@@ -1,10 +1,10 @@
-import Phaser from 'phaser';
 import doctorImage from '../assets/images/doctor.png';
 import patientImage from '../assets/images/patient.png';
 import officeImage from '../assets/images/office.png';
 import ToggleButton from '../gameobjects/Button.js';
+import BaseScene from './BaseScene.js';
 
-export default class DoctorOfficeScene extends Phaser.Scene {
+export default class DoctorOfficeScene extends BaseScene {
     constructor() {
         super({ key: 'DoctorOfficeScene' });
     }
@@ -16,7 +16,12 @@ export default class DoctorOfficeScene extends Phaser.Scene {
         this.load.image('office', officeImage);
     }
 
-    create() {
+    create(data) {
+        super.create(data);
+
+        // Set the scene
+        this.scoreDisplay.setScene(this);
+
         // Get the width and height of the game canvas
         const { width, height } = this.sys.game.config;
 

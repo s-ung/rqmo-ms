@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import background from "../assets/Title_Background.png";
+import Settings from "../gameobjects/Settings";
 
 class TitleScene extends Phaser.Scene {
   constructor() {
@@ -74,6 +75,7 @@ class TitleScene extends Phaser.Scene {
 
       difficultyText.on("pointerdown", () => {
         this.selectedDifficulty = level;
+        Settings.difficulty = level; 
         this.updateDifficultyColors(difficulties);
       });
 

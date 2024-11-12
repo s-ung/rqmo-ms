@@ -59,7 +59,7 @@ export default class BaseScene extends Phaser.Scene {
         this.gameTree = GameTree.getInstance()
         this.head = this.gameTree.getHead()
         this.actions = this.gameTree.getPossibleActions()
-        
+
         // Set up the scene visuals
         this.canvas = this.sys.game.canvas;
         this.width = this.canvas.width;
