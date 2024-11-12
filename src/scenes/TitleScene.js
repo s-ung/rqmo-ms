@@ -4,6 +4,8 @@ import background from "../assets/Title_Background.png";
 class TitleScene extends Phaser.Scene {
   constructor() {
     super({ key: "TitleScene" });
+    this.gameDifficulties = ["Easy", "Medium", "Hard"];
+    this.selectedDifficulty = this.gameDifficulties[1];
   }
 
   preload() {
@@ -39,7 +41,7 @@ class TitleScene extends Phaser.Scene {
 
 
     newGameButton.on("pointerdown", () => {
-      this.scene.switch("DoctorOfficeScene"); // Starts the game in the 'Doctor Office' scene
+      this.scene.start("DoctorOfficeScene", { difficulty: this.selectedDifficulty });
     });
 
     this.tweens.add({
@@ -48,6 +50,41 @@ class TitleScene extends Phaser.Scene {
       duration: 800,
       yoyo: true,
       repeat: -1,
+    });
+
+    // Create difficulty selector
+    this.createDifficultySelector(this.gameDifficulties);
+  }
+
+  createDifficultySelector(difficulties) {
+    // center the text to the middle of the screen
+    const screenCenterX = this.cameras.main.width / 2;
+    const spacing = 200;
+    const totalWidth = (difficulties.length - 1) * spacing;
+    let currentX = screenCenterX - totalWidth / 2;
+
+    difficulties.forEach((level) => {
+      const difficultyText = this.add
+        .text(currentX, 500, level, {
+          fontSize: "36px",
+          fill: this.selectedDifficulty === level ? "#ff0000" : "#ffffff", // Highlight selected level
+        })
+        .setInteractive()
+        .setOrigin(0.5);
+
+      difficultyText.on("pointerdown", () => {
+        this.selectedDifficulty = level;
+        this.updateDifficultyColors(difficulties);
+      });
+
+      currentX += spacing; // Adjust for spacing between difficulty levels
+    });
+  }
+
+  updateDifficultyColors(difficulties) {
+    difficulties.forEach((level, index) => {
+      const color = level === this.selectedDifficulty ? "#ff0000" : "#ffffff";
+      this.children.getAt(index + 4).setStyle({ fill: color }); // Access each difficulty text by its index
     });
   }
 }
