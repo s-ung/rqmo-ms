@@ -1,10 +1,7 @@
 import { ChatBox, ChatDropdownInput } from '../gameobjects/Chat';
 import background from '../assets/background.png';
 import dude from '../assets/dude.png';
-import Phaser from 'phaser';
 import doctor from '../assets/doctor.png';
-import { GameTree } from '../gameobjects/Game';
-import ScoreDisplay from '../gameobjects/ScoreDisplay';
 import BaseScene from './BaseScene';
 
 export default class SpecialistScene extends BaseScene {
@@ -27,11 +24,9 @@ export default class SpecialistScene extends BaseScene {
 
         // Create the chatbox
         this.createChatBox();
+ 
         // Set the data
         this.udpateChatBox();
-
-        // Initialize ScoreDisplay
-        this.scoreDisplay = new ScoreDisplay(this, 250, 40);
     }
 
     createChatBox() {

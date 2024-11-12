@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { GameTree } from '../gameobjects/Game';
+import { ScoreDisplay } from '../gameobjects/ScoreDisplay'
 
 export default class BaseScene extends Phaser.Scene {
     // Handles getting next node and actions
@@ -33,6 +34,7 @@ export default class BaseScene extends Phaser.Scene {
             const selectedAction = this.actions.find((action) => action.getMessage() == message.message)
             if (selectedAction) {
                 this.gameTree.applyAction(selectedAction)
+                this.scoreDisplay.updateScores();
                 this.actions = this.gameTree.getPossibleActions()
                 this.head = this.gameTree.getHead()
                 // Call subclass specific implementation
@@ -57,10 +59,14 @@ export default class BaseScene extends Phaser.Scene {
         this.gameTree = GameTree.getInstance()
         this.head = this.gameTree.getHead()
         this.actions = this.gameTree.getPossibleActions()
+        
         // Set up the scene visuals
         this.canvas = this.sys.game.canvas;
         this.width = this.canvas.width;
         this.height = this.canvas.height;
+
+        // Initialize ScoreDisplay
+        this.scoreDisplay = ScoreDisplay.getInstance(this, 250, 40);
     }
 
     update() { }

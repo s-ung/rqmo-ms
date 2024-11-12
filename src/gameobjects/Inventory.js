@@ -5,6 +5,7 @@ export default class Inventory {
         this.name = 'Player'
         this.diagnosticScore = 0
         this.stressScore = 0
+        this.painScore = 0
     }
 
     static  getInstance() {

@@ -60,17 +60,20 @@ export const GAME_DATA = {
                     {
                         "message": "I’m experiencing extreme fatigue and muscle weakness.",
                         "stressScore": 8,
-                        "diagnosticScore": 10
+                        "diagnosticScore": 10,
+                        "painScore": 5
                     },
                     {
                         "message": "I have constant dizziness and occasional fainting.",
                         "stressScore": 12,
-                        "diagnosticScore": 15
+                        "diagnosticScore": 15,
+                        "painScore": 10
                     },
                     {
                         "message": "It feels like my hands are burning.",
                         "stressScore": 15,
-                        "diagnosticScore": 20
+                        "diagnosticScore": 20,
+                        "painScore": 20
                     }
                 ]
             },
@@ -80,17 +83,20 @@ export const GAME_DATA = {
                     {
                         "message": "I notice the pain worsens in colder environments.",
                         "stressScore": 10,
-                        "diagnosticScore": 12
+                        "diagnosticScore": 12,
+                        "painScore": 10
                     },
                     {
                         "message": "The migraines seem to get worse after intense exercise.",
                         "stressScore": 8,
-                        "diagnosticScore": 15
+                        "diagnosticScore": 15,
+                        "painScore": 10
                     },
                     {
                         "message": "Stress makes everything worse, especially the chest tightness.",
                         "stressScore": 12,
-                        "diagnosticScore": 10
+                        "diagnosticScore": 10,
+                        "painScore": 10
                     }
                 ]
             },
@@ -100,17 +106,20 @@ export const GAME_DATA = {
                     {
                         "message": "I’m scared. I don’t understand what’s happening.",
                         "stressScore": 10,
-                        "diagnosticScore": 0
+                        "diagnosticScore": 0,
+                        "painScore": 10
                     },
                     {
                         "message": "Just give me something to stop the pain!",
                         "stressScore": 20,
-                        "diagnosticScore": 5
+                        "diagnosticScore": 5,
+                        "painScore": 10
                     },
                     {
                         "message": "I feel numbness in my legs and arms. It's getting worse.",
                         "stressScore": 15,
-                        "diagnosticScore": 15
+                        "diagnosticScore": 15,
+                        "painScore": 10
                     }
                 ]
             },
@@ -132,12 +141,14 @@ export const GAME_DATA = {
                     {
                         "message": "Let’s start with blood work, that sounds best.",
                         "stressScore": 5,
-                        "diagnosticScore": 10
+                        "diagnosticScore": 10,
+                        "painScore": 10
                     },
                     {
                         "message": "I’m really anxious, but I’ll go with the MRI.",
                         "stressScore": 15,
-                        "diagnosticScore": 20
+                        "diagnosticScore": 20,
+                        "painScore": 5
                     }
                 ]
             },
@@ -147,12 +158,14 @@ export const GAME_DATA = {
                     {
                         "message": "I think the MRI is better for my symptoms.",
                         "stressScore": 10,
-                        "diagnosticScore": 20
+                        "diagnosticScore": 20,
+                        "painScore": 5
                     },
                     {
                         "message": "I’m not sure about an MRI, it feels too intense.",
                         "stressScore": 8,
-                        "diagnosticScore": 10
+                        "diagnosticScore": 10,
+                        "painScore": 10
                     }
                 ]
             }
@@ -164,17 +177,20 @@ export const GAME_DATA = {
                     {
                         "message": "No clear triggers, it just happens out of nowhere.",
                         "stressScore": 12,
-                        "diagnosticScore": 5
+                        "diagnosticScore": 5,
+                        "painScore": 5
                     },
                     {
                         "message": "Certain foods, especially gluten, seem to make it worse.",
                         "stressScore": 8,
-                        "diagnosticScore": 15
+                        "diagnosticScore": 15,
+                        "painScore": 5
                     },
                     {
                         "message": "My symptoms worsen when I don't sleep well.",
                         "stressScore": 10,
-                        "diagnosticScore": 10
+                        "diagnosticScore": 10,
+                        "painScore": 5
                     }
                 ]
             }
@@ -186,12 +202,14 @@ export const GAME_DATA = {
                     {
                         "message": "What could the spinal tap show? I’m really nervous about this.",
                         "stressScore": 15,
-                        "diagnosticScore": 20
+                        "diagnosticScore": 20,
+                        "painScore": 10
                     },
                     {
                         "message": "I don’t want to do that, can we try something else first?",
                         "stressScore": 10,
-                        "diagnosticScore": 10
+                        "diagnosticScore": 10,
+                        "painScore": 10
                     }
                 ]
             },
@@ -201,7 +219,8 @@ export const GAME_DATA = {
                     {
                         "message": "Let’s try medication while we run more tests.",
                         "stressScore": 5,
-                        "diagnosticScore": 10
+                        "diagnosticScore": 10,
+                        "painScore": 10
                     }
                 ]
             }
@@ -213,12 +232,14 @@ export const GAME_DATA = {
                     {
                         "message": "What diseases are you thinking of?",
                         "stressScore": 12,
-                        "diagnosticScore": 15
+                        "diagnosticScore": 15,
+                        "painScore": 10
                     },
                     {
                         "message": "Neurocalcinosis? That sounds serious, tell me more.",
                         "stressScore": 18,
-                        "diagnosticScore": 20
+                        "diagnosticScore": 20,
+                        "painScore": 10
                     }
                 ]
             },
@@ -228,12 +249,14 @@ export const GAME_DATA = {
                     {
                         "message": "Nerve biopsy sounds like a lot. What does that involve?",
                         "stressScore": 10,
-                        "diagnosticScore": 15
+                        "diagnosticScore": 15,
+                        "painScore": 10
                     },
                     {
                         "message": "If it can help with the diagnosis, let’s do the biopsy.",
                         "stressScore": 12,
-                        "diagnosticScore": 20
+                        "diagnosticScore": 20,
+                        "painScore": 10
                     }
                 ]
             }
