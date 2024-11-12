@@ -1,10 +1,7 @@
 import { ChatBox, ChatDropdownInput } from '../gameobjects/Chat';
 import background from '../assets/background.png';
 import dude from '../assets/dude.png';
-import Phaser from 'phaser';
 import doctor from '../assets/doctor.png';
-import { GameTree } from '../gameobjects/Game';
-import ScoreDisplay from '../gameobjects/ScoreDisplay';
 import BaseScene from './BaseScene';
 
 export default class SpecialistScene extends BaseScene {
@@ -19,19 +16,20 @@ export default class SpecialistScene extends BaseScene {
         this.load.spritesheet('doctor', doctor, { frameWidth: 32, frameHeight: 48 });
     }
 
-    create() {
+    create(data) {
         // Make sure to all super create to set up required objects
-        super.create()
+        super.create(data)
+
+        // Set the scene
+        this.scoreDisplay.setScene(this);
 
         this.add.image(this.width / 2, this.height / 2, 'SpecialistBackground').setDisplaySize(this.width, this.height);
 
         // Create the chatbox
         this.createChatBox();
+ 
         // Set the data
         this.udpateChatBox();
-
-        // Initialize ScoreDisplay
-        this.scoreDisplay = new ScoreDisplay(this, 250, 40);
     }
 
     createChatBox() {

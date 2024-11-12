@@ -5,11 +5,13 @@ export class Action {
     message;
     stressScore;
     diagnosticScore
+    painScore;
 
-    constructor({ message, stressScore, diagnosticScore }) {
+    constructor({ message, stressScore, diagnosticScore, painScore }) {
         this.message = message
         this.stressScore = stressScore
         this.diagnosticScore = diagnosticScore
+        this.painScore = painScore
     }
 
     getMessage() {
@@ -20,6 +22,7 @@ export class Action {
         const inventory = Inventory.getInstance();
         inventory.stressScore += this.stressScore;
         inventory.diagnosticScore += this.diagnosticScore;
+        inventory.painScore += this.painScore;
     }
 }
 

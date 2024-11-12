@@ -7,8 +7,9 @@ import closeWindow from '../assets/images/close.png';
 import trophyImage from '../assets/images/trophy.png';
 import continueButton from '../assets/images/continue.png';
 import EndPhasePopUp from './EndPhasePopUp.js';
+import BaseScene from './BaseScene.js';
 
-export default class DoctorOfficeScene extends Phaser.Scene {
+export default class DoctorOfficeScene extends BaseScene {
     constructor() {
         super({ key: 'DoctorOfficeScene' });
     }
@@ -20,7 +21,12 @@ export default class DoctorOfficeScene extends Phaser.Scene {
         this.load.image('office', officeImage);
     }
 
-    create() {
+    create(data) {
+        super.create(data);
+
+        // Set the scene
+        this.scoreDisplay.setScene(this);
+      
         // Get the width and height of the game canvas
         const { width, height } = this.sys.game.config;
 
