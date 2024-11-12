@@ -3,6 +3,10 @@ import doctorImage from '../assets/images/doctor.png';
 import patientImage from '../assets/images/patient.png';
 import officeImage from '../assets/images/office.png';
 import ToggleButton from '../gameobjects/Button.js';
+import closeWindow from '../assets/images/close.png';
+import trophyImage from '../assets/images/trophy.png';
+import continueButton from '../assets/images/continue.png';
+import EndPhasePopUp from './EndPhasePopUp.js';
 
 export default class DoctorOfficeScene extends Phaser.Scene {
     constructor() {
@@ -44,13 +48,16 @@ export default class DoctorOfficeScene extends Phaser.Scene {
     }
 
     createToggleSceneButton() {
+        const finalSceneMessage="Congratulations! "+
+        " You did great talking to the receptionist. Now it's time to talk to the doctor."+
+        " Press Continue when you are ready.";
         this.switchButton = new ToggleButton(
             this,
             0,
             75,
             'Change Scene',
             { fontSize: '20px', fill: '#ffffff', backgroundColor: '#000000', padding: { x: 10, y: 5 }, borderRadius: 5 },
-            () => this.scene.switch('SpecialistScene') // callback function to switch scenes
+            () =>  this.scene.launch('EndPhasePopUp', {message:finalSceneMessage})
         );
     }
 
