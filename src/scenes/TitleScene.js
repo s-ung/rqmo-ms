@@ -10,6 +10,7 @@ class TitleScene extends Phaser.Scene {
     this.gameDifficulties = ["Easy", "Medium", "Hard"];
     this.selectedDifficulty = this.gameDifficulties[1];
     this.musicPlayer = null; // Declare musicPlayer as null initially
+    this.difficultyTextObjects = [];
   }
 
   preload() {
@@ -78,6 +79,9 @@ class TitleScene extends Phaser.Scene {
     const totalWidth = (difficulties.length - 1) * spacing;
     let currentX = screenCenterX - totalWidth / 2;
 
+    // Clear the difficultyTextObjects array in case this function is called multiple times
+    this.difficultyTextObjects = [];
+
     difficulties.forEach((level) => {
       const difficultyText = this.add
         .text(currentX, 500, level, {
@@ -90,17 +94,21 @@ class TitleScene extends Phaser.Scene {
       difficultyText.on("pointerdown", () => {
         this.selectedDifficulty = level;
         Settings.difficulty = level;
-        this.updateDifficultyColors(difficulties);
+        this.updateDifficultyColors();
       });
 
+      // Store the text object in the array for easy access
+      this.difficultyTextObjects.push(difficultyText);
       currentX += spacing;
     });
   }
 
-  updateDifficultyColors(difficulties) {
-    difficulties.forEach((level, index) => {
+  updateDifficultyColors() {
+    // Update the color of each difficulty text based on the selected difficulty
+    this.difficultyTextObjects.forEach((textObject, index) => {
+      const level = this.gameDifficulties[index];
       const color = level === this.selectedDifficulty ? "#ff0000" : "#ffffff";
-      this.children.getAt(index + 4).setStyle({ fill: color });
+      textObject.setStyle({ fill: color });
     });
   }
 
