@@ -8,9 +8,7 @@ class TitleScene extends Phaser.Scene {
   constructor() {
     super({ key: "TitleScene" });
     this.gameDifficulties = ["Easy", "Medium", "Hard"];
-    this.selectedDifficulty = this.gameDifficulties[1];
-    this.musicPlayer = null; // Declare musicPlayer as null initially
-    this.difficultyTextObjects = [];
+    this.selectedDifficulty = "Medium"; // Default difficulty
   }
 
   preload() {
@@ -18,44 +16,46 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    // Add a background
-    const bg = this.add.image(700, 350, "background");
-    bg.setScale(0.7);
+    // Add background
+    this.add.image(700, 350, "background").setScale(0.7);
 
-    // Initialize the MusicPlayer
+    // Initialize and play background music
     this.musicPlayer = new MusicPlayer(this, backgroundMusic);
+    this.input.once("pointerdown", () => this.startMusic());
 
-    // Start playing the MIDI music only after a user gesture
-    this.input.on("pointerdown", async () => {
-      await this.musicPlayer.initializeAudio(); // Ensure AudioContext is initialized
-      if (this.musicPlayer.audioContext.state === "suspended") {
-        await this.musicPlayer.audioContext.resume();
-      }
-      this.musicPlayer.loadAndPlayMusic(); // Play music after resuming
-    });
+    // Create UI elements
+    this.createTitle();
+    this.createNewGameButton();
+    this.createDifficultySelector();
+    this.createVolumeControls();
+  }
 
-    // Add volume control buttons for demonstration
-    this.createVolumeControl();
+  async startMusic() {
+    await this.musicPlayer.initializeAudio();
+    if (this.musicPlayer.audioContext.state === "suspended") {
+      await this.musicPlayer.audioContext.resume();
+    }
+    this.musicPlayer.loadAndPlayMusic();
+  }
 
-    // Create the "New Game" button
-    const newGameButtonBox = this.add.graphics();
-    newGameButtonBox.fillStyle(0x808080, 0.9);
-    newGameButtonBox.fillRect(530, 140, 440, 120);
+  createTitle() {
+    // Create background box for the title
+    const titleBox = this.add.graphics();
+    titleBox.fillStyle(0x808080, 0.9); // Gray color with 90% opacity
+    titleBox.fillRect(500, 150, 500, 100); // Adjust position and size as needed
 
-    this.titleText = this.add
-      .text(750, 200, "RQMO Game", {
-        fontSize: "72px",
-        fill: "#ffffff",
-      })
-      .setOrigin(0.5);
+    // Create the "RQMO Game" title text
+    this.add.text(750, 200, "RQMO Game", {
+      fontSize: "72px",
+      fill: "#ffffff",
+    }).setOrigin(0.5);
+  }
 
-    const newGameButton = this.add
-      .text(750, 350, "New Game", {
-        fontSize: "48px",
-        fill: "#ffffff",
-      })
-      .setOrigin(0.5)
-      .setInteractive();
+  createNewGameButton() {
+    const newGameButton = this.add.text(750, 350, "New Game", {
+      fontSize: "48px",
+      fill: "#ffffff",
+    }).setOrigin(0.5).setInteractive();
 
     newGameButton.on("pointerdown", () => {
       this.scene.start("DoctorOfficeScene", { difficulty: this.selectedDifficulty });
@@ -68,79 +68,48 @@ class TitleScene extends Phaser.Scene {
       yoyo: true,
       repeat: -1,
     });
-
-    // Create difficulty selector
-    this.createDifficultySelector(this.gameDifficulties);
   }
 
-  createDifficultySelector(difficulties) {
-    const screenCenterX = this.cameras.main.width / 2;
+  createDifficultySelector() {
+    const centerX = this.cameras.main.width / 2;
     const spacing = 200;
-    const totalWidth = (difficulties.length - 1) * spacing;
-    let currentX = screenCenterX - totalWidth / 2;
+    let xPosition = centerX - ((this.gameDifficulties.length - 1) * spacing) / 2;
 
-    // Clear the difficultyTextObjects array in case this function is called multiple times
-    this.difficultyTextObjects = [];
+    this.difficultyTextObjects = this.gameDifficulties.map((level) => {
+      const text = this.add.text(xPosition, 500, level, {
+        fontSize: "36px",
+        fill: level === this.selectedDifficulty ? "#ff0000" : "#ffffff",
+      }).setInteractive().setOrigin(0.5);
 
-    difficulties.forEach((level) => {
-      const difficultyText = this.add
-        .text(currentX, 500, level, {
-          fontSize: "36px",
-          fill: this.selectedDifficulty === level ? "#ff0000" : "#ffffff",
-        })
-        .setInteractive()
-        .setOrigin(0.5);
-
-      difficultyText.on("pointerdown", () => {
+      text.on("pointerdown", () => {
         this.selectedDifficulty = level;
         Settings.difficulty = level;
         this.updateDifficultyColors();
       });
 
-      // Store the text object in the array for easy access
-      this.difficultyTextObjects.push(difficultyText);
-      currentX += spacing;
+      xPosition += spacing;
+      return text;
     });
   }
 
   updateDifficultyColors() {
-    // Update the color of each difficulty text based on the selected difficulty
-    this.difficultyTextObjects.forEach((textObject, index) => {
-      const level = this.gameDifficulties[index];
-      const color = level === this.selectedDifficulty ? "#ff0000" : "#ffffff";
-      textObject.setStyle({ fill: color });
+    this.difficultyTextObjects.forEach((text, index) => {
+      const color = this.gameDifficulties[index] === this.selectedDifficulty ? "#ff0000" : "#ffffff";
+      text.setStyle({ fill: color });
     });
   }
 
-  createVolumeControl() {
-    // Create volume up button
-    const volumeUpButton = this.add.text(100, 100, "Volume Up", {
-      fontSize: "24px",
-      fill: "#ffffff",
-    }).setInteractive();
+  createVolumeControls() {
+    const volumeControls = [
+      { label: "Volume Up", y: 100, action: () => this.musicPlayer.setVolume(0) },
+      { label: "Volume Down", y: 150, action: () => this.musicPlayer.setVolume(-20) },
+      { label: "Mute", y: 200, action: () => this.musicPlayer.setVolume(-60) },
+    ];
 
-    volumeUpButton.on("pointerdown", async () => {
-      await this.musicPlayer.setVolume(0); // Set volume to full
-    });
-
-    // Create volume down button
-    const volumeDownButton = this.add.text(100, 150, "Volume Down", {
-      fontSize: "24px",
-      fill: "#ffffff",
-    }).setInteractive();
-
-    volumeDownButton.on("pointerdown", async () => {
-      await this.musicPlayer.setVolume(-20); // Lower the volume
-    });
-
-    // Create mute button
-    const muteButton = this.add.text(100, 200, "Mute", {
-      fontSize: "24px",
-      fill: "#ffffff",
-    }).setInteractive();
-
-    muteButton.on("pointerdown", async () => {
-      await this.musicPlayer.setVolume(-60); // Mute the audio
+    volumeControls.forEach(({ label, y, action }) => {
+      this.add.text(100, y, label, { fontSize: "24px", fill: "#ffffff" })
+        .setInteractive()
+        .on("pointerdown", action);
     });
   }
 }
