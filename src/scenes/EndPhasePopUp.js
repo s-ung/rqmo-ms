@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import closeWindow from '../assets/images/close.png';
 import trophyImage from '../assets/images/trophy.png';
 import continueButton from '../assets/images/continue.png';
 
@@ -8,7 +7,6 @@ export default class EndPhasePopUp extends Phaser.Scene {
 
     preload() {
          // Load assets for the popup elements
-         this.load.image('closeButton', closeWindow);
          this.load.image('trophyImage', trophyImage);  // Image to show in popup
          this.load.image('continueButton', continueButton);  // Continue button
     }
