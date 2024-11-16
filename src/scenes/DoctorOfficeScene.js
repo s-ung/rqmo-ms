@@ -1,12 +1,7 @@
-import Phaser from 'phaser';
 import doctorImage from '../assets/images/doctor.png';
 import patientImage from '../assets/images/patient.png';
 import officeImage from '../assets/images/office.png';
 import ToggleButton from '../gameobjects/Button.js';
-import closeWindow from '../assets/images/close.png';
-import trophyImage from '../assets/images/trophy.png';
-import continueButton from '../assets/images/continue.png';
-import EndPhasePopUp from './EndPhasePopUp.js';
 import BaseScene from './BaseScene.js';
 
 export default class DoctorOfficeScene extends BaseScene {
