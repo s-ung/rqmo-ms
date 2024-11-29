@@ -36,27 +36,30 @@ export class ScoreDisplay {
     // Method to create UI elements
     createUIElements() {
         const { x, y } = this;
-
+    
+        // Shift the x-coordinate to the right side of the screen
+        const offsetX = this.scene.scale.width - 300; // Adjust for padding from the right edge
+    
         // Background container
-        this.uiElements.backgroundBox = this.scene.add.rectangle(x - 5, y + 40, 270, 150, 0x000000, 0.8).setDepth(1);
-
+        this.uiElements.backgroundBox = this.scene.add.rectangle(offsetX + 150, y + 40, 270, 150, 0x000000, 0.8).setDepth(1);
+    
         // Stress Score Bar
-        this.uiElements.stressBarBackground = this.scene.add.rectangle(x, y, 200, 20, 0x555555).setDepth(1);
-        this.uiElements.stressBar = this.scene.add.rectangle(x - 100, y, this.getBarWidth(this.inventory.stressScore), 20, 0xff0000).setDepth(1);
-        this.uiElements.stressLabel = this.scene.add.text(x - 100, y - 10, 'Stress', { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 1).setDepth(1);
-        this.uiElements.stressPercentageText = this.scene.add.text(x + 115, y, `${this.getPercentage(this.inventory.stressScore)}%`, { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 0.5).setDepth(1);
-
+        this.uiElements.stressBarBackground = this.scene.add.rectangle(offsetX + 150, y, 200, 20, 0x555555).setDepth(1);
+        this.uiElements.stressBar = this.scene.add.rectangle(offsetX + 50, y, this.getBarWidth(this.inventory.stressScore), 20, 0xff0000).setDepth(1);
+        this.uiElements.stressLabel = this.scene.add.text(offsetX + 50, y - 10, 'Stress', { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 1).setDepth(1);
+        this.uiElements.stressPercentageText = this.scene.add.text(offsetX + 265, y, `${this.getPercentage(this.inventory.stressScore)}%`, { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 0.5).setDepth(1);
+    
         // Pain Score Bar
-        this.uiElements.painBarBackground = this.scene.add.rectangle(x, y + 40, 200, 20, 0x555555).setDepth(1);
-        this.uiElements.painBar = this.scene.add.rectangle(x - 100, y + 40, this.getBarWidth(this.inventory.painScore), 20, 0xffa500).setDepth(1); // Orange for Pain
-        this.uiElements.painLabel = this.scene.add.text(x - 110, y + 30, 'Pain', { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 1).setDepth(1);
-        this.uiElements.painPercentageText = this.scene.add.text(x + 115, y + 40, `${this.getPercentage(this.inventory.painScore)}%`, { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 0.5).setDepth(1);
-
+        this.uiElements.painBarBackground = this.scene.add.rectangle(offsetX + 150, y + 40, 200, 20, 0x555555).setDepth(1);
+        this.uiElements.painBar = this.scene.add.rectangle(offsetX + 50, y + 40, this.getBarWidth(this.inventory.painScore), 20, 0xffa500).setDepth(1); 
+        this.uiElements.painLabel = this.scene.add.text(offsetX + 40, y + 30, 'Pain', { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 1).setDepth(1);
+        this.uiElements.painPercentageText = this.scene.add.text(offsetX + 265, y + 40, `${this.getPercentage(this.inventory.painScore)}%`, { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 0.5).setDepth(1);
+    
         // Diagnostic Score Bar
-        this.uiElements.diagnosticBarBackground = this.scene.add.rectangle(x, y + 80, 200, 20, 0x555555).setDepth(1);
-        this.uiElements.diagnosticBar = this.scene.add.rectangle(x - 100, y + 80, this.getBarWidth(this.inventory.diagnosticScore), 20, 0x0000ff).setDepth(1);
-        this.uiElements.diagnosticLabel = this.scene.add.text(x - 86, y + 70, 'Diagnostic', { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 1).setDepth(1);
-        this.uiElements.diagnosticPercentageText = this.scene.add.text(x + 115, y + 80, `${this.getPercentage(this.inventory.diagnosticScore)}%`, { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 0.5).setDepth(1);
+        this.uiElements.diagnosticBarBackground = this.scene.add.rectangle(offsetX + 150, y + 80, 200, 20, 0x555555).setDepth(1);
+        this.uiElements.diagnosticBar = this.scene.add.rectangle(offsetX + 50, y + 80, this.getBarWidth(this.inventory.diagnosticScore), 20, 0x0000ff).setDepth(1);
+        this.uiElements.diagnosticLabel = this.scene.add.text(offsetX + 64, y + 70, 'Diagnostic', { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 1).setDepth(1);
+        this.uiElements.diagnosticPercentageText = this.scene.add.text(offsetX + 265, y + 80, `${this.getPercentage(this.inventory.diagnosticScore)}%`, { fontSize: '12px', color: '#ffffff' }).setOrigin(0.5, 0.5).setDepth(1);
     }
 
     // Setter method to update the scene
